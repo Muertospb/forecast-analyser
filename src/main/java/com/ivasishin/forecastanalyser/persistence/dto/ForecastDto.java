@@ -12,5 +12,5 @@ public class ForecastDto {
     private CurrentForecastDto current;
     private ArrayList<DailyForecastDto> daily;
     @JsonProperty("timezone_offset")
-    private Long timezoneOffset;
+    private int timezoneOffset;
 }

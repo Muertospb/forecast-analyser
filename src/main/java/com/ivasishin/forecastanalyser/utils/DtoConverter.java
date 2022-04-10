@@ -7,9 +7,8 @@ import com.ivasishin.forecastanalyser.persistence.entities.City;
 import com.ivasishin.forecastanalyser.persistence.entities.DailyForecast;
 import com.ivasishin.forecastanalyser.persistence.entities.Forecast;
 
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 
 public class DtoConverter {
@@ -25,8 +24,9 @@ public class DtoConverter {
 
     public static Forecast convertDtoToForecast(ForecastDto forecastDto) {
         Forecast forecast = new Forecast();
-        forecast.setDate(Instant.ofEpochMilli(forecastDto.getCurrent().getDt() + forecastDto.getTimezoneOffset())
-                .atZone(ZoneId.systemDefault()).toLocalDate());
+        forecast.setDate(LocalDateTime.ofEpochSecond
+                (forecastDto.getCurrent().getDt(), 0, ZoneOffset.ofTotalSeconds(forecastDto.getTimezoneOffset()))
+                .toLocalDate());
         forecast.setTemp(forecastDto.getCurrent().getTemp());
         forecast.setClouds(forecastDto.getCurrent().getClouds());
         forecast.setHumidity(forecastDto.getCurrent().getHumidity());
@@ -43,9 +43,11 @@ public class DtoConverter {
         return forecast;
     }
 
-    private static DailyForecast convertDtoToDailyForecast(DailyForecastDto dto, Long timezoneOffset) {
+    private static DailyForecast convertDtoToDailyForecast(DailyForecastDto dto, int timeZoneOffser) {
         DailyForecast dailyForecast = new DailyForecast();
-        dailyForecast.setDate(Instant.ofEpochMilli(dto.getDt() + timezoneOffset).atZone(ZoneId.systemDefault()).toLocalDateTime());
+        dailyForecast.setDate(LocalDateTime.ofEpochSecond
+                (dto.getDt(), 0, ZoneOffset.ofTotalSeconds(timeZoneOffser))
+                .toLocalDate());
         dailyForecast.setClouds(dto.getClouds());
         dailyForecast.setHumidity(dto.getHumidity());
         dailyForecast.setPressure(dto.getPressure());

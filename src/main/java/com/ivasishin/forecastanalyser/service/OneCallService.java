@@ -27,8 +27,7 @@ public class OneCallService {
     @Value("${openweathermap.apikey}")
     private String apiKey;
 
-//    @Scheduled(cron = "0 0 * ? * *")
-    @Scheduled(cron = "* * * ? * *")
+    @Scheduled(cron = "0 30 * ? * *")
     private void getForecastData(){
         List<City> cityList = cityRepo.findAll();
         for (City city: cityList) {
