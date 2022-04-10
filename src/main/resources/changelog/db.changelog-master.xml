@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <include file="changelog/0_initial_schema.xml" relativeToChangelogFile="false"/>
+
+    <include file="changelog/202204061116_create_table_usr.xml" relativeToChangelogFile="false"/>
+    <include file="changelog/202204061127_create_table_user_role.xml" relativeToChangelogFile="false"/>
+    <include file="changelog/202204061137_insert_demo_data.xml" relativeToChangelogFile="false"/>
+    <include file="changelog/202204061159_create_table_city.xml" relativeToChangelogFile="false"/>
+    <include file="changelog/202204061417_create_table_user_city.xml" relativeToChangelogFile="false"/>
+    <include file="changelog/202204081908_create_table_forecast.xml" relativeToChangelogFile="false"/>
+    <include file="changelog/202204081924_create_table_daily.xml" relativeToChangelogFile="false"/>
+
+</databaseChangeLog>

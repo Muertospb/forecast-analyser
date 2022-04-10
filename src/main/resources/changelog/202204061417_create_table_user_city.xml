@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="202204061417_create_table_user_city" author="dmitrii.ivasishin">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="user_city" schemaName="public"/>
+            </not>
+        </preConditions>
+        <sql>
+            CREATE TABLE user_city(
+            id BIGSERIAL PRIMARY KEY,
+            user_id INTEGER,
+            city_id INTEGER
+            );
+
+            COMMENT ON TABLE user_city IS 'Relation table for User and City';
+            COMMENT ON COLUMN user_city.id IS 'Line id';
+            COMMENT ON COLUMN user_city.user_id IS 'User id';
+            COMMENT ON COLUMN user_city.city_id IS 'City id';
+        </sql>
+    </changeSet>
+    <changeSet id="202204061420_alter_table_user_city_user_id_add_constraints" author="dmitrii.ivasishin">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="usr"/>
+            <columnExists tableName="user_city" columnName="user_id"/>
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="user_city_user_id_fk"/>
+            </not>
+        </preConditions>
+        <sql>
+            ALTER TABLE user_city ADD CONSTRAINT user_city_user_id_fk
+            FOREIGN KEY (user_id)
+            REFERENCES usr(id);
+        </sql>
+    </changeSet>
+    <changeSet id="202204061652_alter_table_user_city_city_id_add_constraints" author="dmitrii.ivasishin">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="city"/>
+            <columnExists tableName="user_city" columnName="city_id"/>
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="user_city_city_id_fk"/>
+            </not>
+        </preConditions>
+        <sql>
+            ALTER TABLE user_city ADD CONSTRAINT user_city_city_id_fk
+            FOREIGN KEY (city_id)
+            REFERENCES city(id);
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

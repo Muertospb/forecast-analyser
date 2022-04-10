@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="202204061116_create_table_usr" author="dmitrii.ivasishin">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="usr" schemaName="public"/>
+            </not>
+        </preConditions>
+        <sql>
+            CREATE TABLE usr(
+            id BIGSERIAL PRIMARY KEY,
+            username VARCHAR(32),
+            password VARCHAR(255),
+            active BOOLEAN
+            );
+
+            COMMENT ON TABLE usr IS 'Users table';
+            COMMENT ON COLUMN usr.id IS 'User id';
+            COMMENT ON COLUMN usr.username IS 'User name';
+            COMMENT ON COLUMN usr.password IS 'User password';
+            COMMENT ON COLUMN usr.active IS 'Is user active';
+        </sql>
+    </changeSet>
+</databaseChangeLog>

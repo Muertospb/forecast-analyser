@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="202204061159_create_table_city" author="dmitrii.ivasishin">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="city" schemaName="public"/>
+            </not>
+        </preConditions>
+        <sql>
+            CREATE TABLE city(
+            id BIGSERIAL PRIMARY KEY,
+            name VARCHAR(32),
+            state VARCHAR(16),
+            lat DECIMAL,
+            lon DECIMAL,
+            country VARCHAR(32)
+            );
+
+            COMMENT ON TABLE city IS 'City or location to observe';
+            COMMENT ON COLUMN city.id IS 'City id';
+            COMMENT ON COLUMN city.name IS 'City or location name';
+            COMMENT ON COLUMN city.state IS 'State';
+            COMMENT ON COLUMN city.lat IS 'Latitude';
+            COMMENT ON COLUMN city.lon IS 'Longitude';
+            COMMENT ON COLUMN city.country IS 'Country';
+        </sql>
+    </changeSet>
+</databaseChangeLog>

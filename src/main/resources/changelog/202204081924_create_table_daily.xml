@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="202204081924_create_table_daily" author="dmitrii.ivasishin">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="daily" schemaName="public"/>
+            </not>
+        </preConditions>
+        <sql>
+            CREATE TABLE daily(
+            id BIGSERIAL PRIMARY KEY,
+            date DATE,
+            min_temp DECIMAL,
+            max_temp DECIMAL,
+            pressure SMALLINT,
+            humidity SMALLINT,
+            uvi DECIMAL,
+            clouds SMALLINT,
+            wind_speed DECIMAL,
+            weather_code SMALLINT,
+            forecast_id INTEGER
+            );
+
+            COMMENT ON TABLE daily IS 'Daily forecast data for selected city';
+            COMMENT ON COLUMN daily.id IS 'Daily forecast id';
+            COMMENT ON COLUMN daily.date IS 'Date of forecast';
+            COMMENT ON COLUMN daily.min_temp IS 'Minimal temperature, Celsius';
+            COMMENT ON COLUMN daily.max_temp IS 'Maximal temperature, Celsius';
+            COMMENT ON COLUMN daily.pressure IS 'Pressure';
+            COMMENT ON COLUMN daily.humidity IS 'Humidity, percent';
+            COMMENT ON COLUMN daily.uvi IS 'Uvi';
+            COMMENT ON COLUMN daily.clouds IS 'Clouds state, percent';
+            COMMENT ON COLUMN daily.wind_speed IS 'Wind speed state, m/sec';
+            COMMENT ON COLUMN daily.weather_code IS 'Weather code, coded integer';
+            COMMENT ON COLUMN daily.forecast_id IS 'Forecast id';
+        </sql>
+    </changeSet>
+    <changeSet id="202204081930_alter_table_daily_forecast_id_add_constraints" author="dmitrii.ivasishin">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="forecast"/>
+            <columnExists tableName="daily" columnName="forecast_id"/>
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="daily_forecast_id_fk"/>
+            </not>
+        </preConditions>
+        <sql>
+            ALTER TABLE daily ADD CONSTRAINT daily_forecast_id_fk
+            FOREIGN KEY (forecast_id)
+            REFERENCES forecast(id);
+        </sql>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="202204081908_create_table_forecast" author="dmitrii.ivasishin">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="forecast" schemaName="public"/>
+            </not>
+        </preConditions>
+        <sql>
+            CREATE TABLE forecast(
+            id BIGSERIAL PRIMARY KEY,
+            date DATE,
+            temp DECIMAL,
+            pressure SMALLINT,
+            humidity SMALLINT,
+            uvi DECIMAL,
+            clouds SMALLINT,
+            wind_speed DECIMAL,
+            weather_code SMALLINT,
+            city_id INTEGER
+            );
+
+            COMMENT ON TABLE forecast IS 'Actual forecast data for selected city';
+            COMMENT ON COLUMN forecast.id IS 'Forecast id';
+            COMMENT ON COLUMN forecast.date IS 'Date of actual forecast';
+            COMMENT ON COLUMN forecast.temp IS 'Actual temperature, Celsius';
+            COMMENT ON COLUMN forecast.pressure IS 'Actual pressure';
+            COMMENT ON COLUMN forecast.humidity IS 'Actual humidity, percent';
+            COMMENT ON COLUMN forecast.uvi IS 'Actual uvi';
+            COMMENT ON COLUMN forecast.clouds IS 'Actual clouds state, percent';
+            COMMENT ON COLUMN forecast.wind_speed IS 'Actual wind speed state, m/sec';
+            COMMENT ON COLUMN forecast.weather_code IS 'Actual weather code, coded integer';
+            COMMENT ON COLUMN forecast.city_id IS 'City id';
+        </sql>
+    </changeSet>
+    <changeSet id="202204081922_alter_table_forecast_city_id_add_constraints" author="dmitrii.ivasishin">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="city"/>
+            <columnExists tableName="forecast" columnName="city_id"/>
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="forecast_city_id_fk"/>
+            </not>
+        </preConditions>
+        <sql>
+            ALTER TABLE forecast ADD CONSTRAINT forecast_city_id_fk
+            FOREIGN KEY (city_id)
+            REFERENCES city(id);
+        </sql>
+    </changeSet>
+</databaseChangeLog>
