@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Forecast analysis</title>
+    <title>Forecast Analyzer</title>
 </head>
 <body>
     <#nested>

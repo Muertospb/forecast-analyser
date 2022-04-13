@@ -11,8 +11,7 @@
     </div>
     <#list cities?sort_by("name") as city>
         <div>
-            <form action="/stats" method="post">
-                <input type="hidden" name="_csrf" value="${_csrf.token}" />
+            <form action="/stats" method="get">
                 <input type="hidden" name="city_id" value="${city.id}" />
                 <div><a>${city.name}, ${city.country}, ${city.state}  </a><input type="submit" value="Show statistics"></div>
             </form>

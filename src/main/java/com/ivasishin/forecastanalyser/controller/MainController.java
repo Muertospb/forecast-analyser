@@ -27,4 +27,10 @@ public class MainController {
         model.put("cities", cities);
         return "main";
     }
+
+    @GetMapping("/stats")
+    public String stats(@AuthenticationPrincipal User user) {
+
+        return "stats";
+    }
 }
