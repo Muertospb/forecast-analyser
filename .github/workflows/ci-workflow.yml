@@ -21,4 +21,4 @@ jobs:
           git status
           mvn package -Dspring.datasource.password=${{secrets.POSTGRES_PASSWORD}} -Dopenweathermap.apikey=${{secrets.OPENWEATHER_API_KEY}}
           echo ${{secrets.USER_PASS}} | sudo -S docker build -t forecast-analizer .
-          echo ${{secrets.USER_PASS}} | sudo -S docker run --rm --network host -e spring.datasource.password=${{secrets.POSTGRES_PASSWORD}} -e openweathermap.apikey=${{secrets.OPENWEATHER_API_KEY}} forecast-analizer
+          echo ${{secrets.USER_PASS}} | sudo -S docker run --rm --name forecast-analizer --network host -e spring.datasource.password=${{secrets.POSTGRES_PASSWORD}} -e openweathermap.apikey=${{secrets.OPENWEATHER_API_KEY}} forecast-analizer
