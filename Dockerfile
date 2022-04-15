@@ -1,4 +1,4 @@
-FROM openjdk:11.0.10-jre-nanoserver
+FROM openjdk:12-alpine
 
 COPY target/forecast-analyzer.jar forecast-analyzer.jar
 
