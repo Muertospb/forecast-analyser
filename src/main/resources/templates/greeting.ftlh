@@ -26,9 +26,9 @@
     <div>10. VPS rent, configuration</div>
     <div>11. First deploy, start collecting demo data</div>
     <div>12. Statistic stub</div>
-    <div>---=== You are here ===---</div>
     <div>13. Docker</div>
     <div>14. CI/CD configuring via GitHub Actions</div>
+    <div>---=== You are here ===---</div>
     <div>15. Statistic processing logic implementation</div>
     <div>16. Unexpected features</div>
     <div>17. UI improvement</div>
