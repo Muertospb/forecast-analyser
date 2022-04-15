@@ -21,4 +21,4 @@ jobs:
           git status
           mvn package
           echo ${{secrets.USER_PASS}} | sudo -S docker build -t forecast-analizer .
-          echo ${{secrets.USER_PASS}} | sudo -S docker run forecast-analizer
+          echo ${{secrets.USER_PASS}} | sudo -S docker run -p 5432:5432 forecast-analizer
