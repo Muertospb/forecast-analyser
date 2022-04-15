@@ -19,4 +19,5 @@ jobs:
           cd forecast-analyser
           git pull origin master
           git status
-          
+          mvn package
+          docker build -t forecast-analizer .
