@@ -20,4 +20,4 @@ jobs:
           git pull origin master
           git status
           mvn package
-          docker build -t forecast-analizer .
+          sudo docker build -t forecast-analizer .
