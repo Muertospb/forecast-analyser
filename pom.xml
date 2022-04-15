@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.ivasishin</groupId>
-	<artifactId>forecast-analyser</artifactId>
-	<version>0.0.3-SNAPSHOT</version>
-	<name>forecast-analyser</name>
+	<artifactId>forecast-analyzer</artifactId>
+	<version>0.0.4-SNAPSHOT</version>
+	<name>forecast-analyzer</name>
 	<description>Pet project for collecting and processing forecast data</description>
 	<properties>
 		<java.version>11</java.version>
