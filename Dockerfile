@@ -1,4 +1,4 @@
-FROM openjdk:11-jdk-alpine
+FROM openjdk:11-alpine
 
 COPY target/forecast-analyzer.jar forecast-analyzer.jar
 
