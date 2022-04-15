@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="202204151837_alter_table_city_alter_column_state" author="dmitrii.ivasishin">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="city" schemaName="public"/>
+            <columnExists tableName="city" columnName="state"/>
+        </preConditions>
+        <sql>
+            ALTER TABLE city ALTER COLUMN state TYPE VARCHAR(32);
+        </sql>
+    </changeSet>
+</databaseChangeLog>

@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.ivasishin</groupId>
 	<artifactId>forecast-analyzer</artifactId>
-	<version>0.1.0</version>
+	<version>0.1.1</version>
 	<name>forecast-analyzer</name>
 	<description>Pet project for collecting and processing forecast data</description>
 	<properties>

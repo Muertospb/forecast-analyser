@@ -10,5 +10,5 @@ public class CityDto {
     private double lat;
     private double lon;
     private String country;
-    private String state;
+    private String state = "";
 }

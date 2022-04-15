@@ -13,5 +13,6 @@
     <include file="changelog/202204061417_create_table_user_city.xml" relativeToChangelogFile="false"/>
     <include file="changelog/202204081908_create_table_forecast.xml" relativeToChangelogFile="false"/>
     <include file="changelog/202204081924_create_table_daily.xml" relativeToChangelogFile="false"/>
+    <include file="changelog/202204151837_alter_table_city_alter_column_state.xml" relativeToChangelogFile="false"/>
 
 </databaseChangeLog>
