@@ -8,7 +8,7 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     steps:
-    - name: testing ssh connection
+    - name: build and deploy
       uses: appleboy/ssh-action@master
       with:
         host: ispcentos.hubo.ru
@@ -19,6 +19,6 @@ jobs:
           cd forecast-analyser
           git pull origin master
           git status
-          mvn package
+          mvn package -Dspring.datasource.password=${{secrets.POSTGRES_PASSWORD}}
           echo ${{secrets.USER_PASS}} | sudo -S docker build -t forecast-analizer .
           echo ${{secrets.USER_PASS}} | sudo -S docker run --rm -d --network host -e spring.datasource.password=${{secrets.POSTGRES_PASSWORD}} -e openweathermap.apikey=${{secrets.OPENWEATHER_API_KEY}} forecast-analizer
